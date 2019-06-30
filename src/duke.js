@@ -5,4 +5,4 @@ function Duke(args) {
 }
 
 const duke = new Duke({ name: 'dracula' });
-log(duke); // console.log replacement
+console.debug(duke.toString());

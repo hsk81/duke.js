@@ -12,6 +12,12 @@ add_executable(
     duke
 )
 target_include_directories(
+    duke PRIVATE lib/duktape-2.3.0/extras/console
+)
+target_sources(
+    duke PRIVATE lib/duktape-2.3.0/extras/console/duk_console.c
+)
+target_include_directories(
     duke PRIVATE lib/duktape-2.3.0/src
 )
 target_sources(

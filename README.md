@@ -19,16 +19,16 @@ npm install
 
 ## Development
 
-### Building
-
-```sh
-npm run build
-```
-
 ### Cleaning
 
 ```sh
 npm run clean
+```
+
+### Building
+
+```sh
+npm run build
 ```
 
 ## Usage
@@ -51,13 +51,22 @@ echo "function id(a) { return a; }; id(1)" | npm start
 ⪡ 1
 ```
 
-### Simple Logging
+### Console Logging
 
 ```sh
-echo "log('message')" | npm start
+echo "console.log('message')" | npm start
 ```
 ```
 ⪢ message
+```
+```
+⪡ undefined
+```
+```sh
+echo "console.error('message')" | npm start
+```
+```
+⫸ Error: message
 ```
 ```
 ⪡ undefined
@@ -81,7 +90,7 @@ cat ./src/duke.js | npm start ## or:
 npm start < ./src/duke.js
 ```
 ```
-> duke@1.0.0 start ~
+> duke@x.y.z start ~
 > npx terser | ./build/duke
 ```
 ```
@@ -91,8 +100,9 @@ npm start < ./src/duke.js
 ⪡ undefined
 ```
 
-[Duktape]: https://duktape.org/
-
 ## Copyright
 
  © 2019 [Hasan Karahan](https://github.com/hsk81)
+
+---
+[Duktape]: https://duktape.org/
