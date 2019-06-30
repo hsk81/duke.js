@@ -11,13 +11,6 @@ Description     : A cross-platform open-source make system
 URL             : https://www.cmake.org/
 ```
 
-```
-Name            : duktape
-Version         : 2.3.0-2
-Description     : Embeddable Javascript engine
-URL             : https://duktape.org/
-```
-
 ## Installation
 
 ```sh
