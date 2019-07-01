@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(duke VERSION 0.2.0)
+project(duke VERSION 0.3.0)
 
 set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -fomit-frame-pointer")
 set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -fstrict-aliasing")
