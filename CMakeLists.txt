@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(duke VERSION 0.2.0)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fstrict-aliasing")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -fomit-frame-pointer")
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -fstrict-aliasing")
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -Os")
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -pedantic")
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -Wall")
 
 add_executable(
     duke
@@ -24,7 +23,9 @@ target_sources(
     duke PRIVATE lib/duktape-2.3.0/src/duktape.c
 )
 target_sources(
-    duke PRIVATE src/main.c
+    duke PRIVATE src/dracula.cpp
+         PRIVATE src/io.cpp
+         PRIVATE src/main.cpp
 )
 target_link_libraries(
     duke "-lm"

@@ -1,6 +1,6 @@
 # Duke.js: a minimal JavaScript interpreter
 
-Duke.js is a minimal JavaScript interpreter, which has been build with [Duktape] &ndash; an embeddable and portable Javascript engine with a compact footprint. The `duke` interpreter consumes a single line of JavaScript code and then executes it, while it's possible to run an entire script by having it (automatically) minified.
+Duke.js is a minimal JavaScript interpreter, which has been build with [Duktape] &ndash; an embeddable and portable Javascript engine with a compact footprint. The `duke` interpreter consumes JavaScript code from the standard input and then evaluates it.
 
 ## Prerequisites
 
@@ -84,14 +84,14 @@ echo "throw new Error('message')" | npm start
 ### Running Scripts
 
 ```sh
-cat ./src/duke.js | npm start ## or:
+cat ./tst/dracula.js | npm start ## or:
 ```
 ```sh
-npm start < ./src/duke.js
+npm start < ./tst/dracula.js
 ```
 ```
 > duke@x.y.z start ~
-> npx terser | ./build/duke
+> build/duke
 ```
 ```
 ⪢ Duke: "dracula"

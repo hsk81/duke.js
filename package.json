@@ -1,30 +1,27 @@
 {
   "author": {
-    "name": "Hasan Karahan",
     "email": "hasan.karahan@blackhan.com",
+    "name": "Hasan Karahan",
     "url": "https://github.com/hsk81"
   },
-  "name": "duke",
-  "version": "0.2.0",
-  "description": "minimal JavaScript interpreter",
-  "main": "",
-  "scripts": {
-    "postinstall": "cmake -B build && echo",
-    "build": "make -C build",
-    "clean": "make -C build clean",
-    "start": "npx terser | ./build/duke",
-    "test": "echo true | ./build/duke"
+  "bugs": {
+    "url": "https://github.com/hsk81/duke/issues"
   },
+  "description": "minimal JavaScript interpreter",
+  "homepage": "https://github.com/hsk81/duke#readme",
+  "license": "ISC",
+  "main": "",
+  "name": "duke",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hsk81/duke.git"
   },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hsk81/duke/issues"
+  "scripts": {
+    "build": "make -C build",
+    "clean": "make -C build clean",
+    "postinstall": "cmake -B build && echo",
+    "start": "build/duke",
+    "test": "echo true | build/duke"
   },
-  "homepage": "https://github.com/hsk81/duke#readme",
-  "devDependencies": {
-    "terser": "^4.0.0"
-  }
+  "version": "0.2.0"
 }
