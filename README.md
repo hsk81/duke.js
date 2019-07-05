@@ -14,7 +14,7 @@ URL             : https://www.cmake.org/
 ## Installation
 
 ```sh
-npm install
+npm install duke.js -g
 ```
 
 ## Development
@@ -31,12 +31,18 @@ npm run clean
 npm run build
 ```
 
+### Testing
+
+```sh
+npm run test
+```
+
 ## Usage
 
 ### Doing Arithmetic
 
 ```sh
-echo "1/0" | npm start
+echo "1/0" | duke
 ```
 ```
 ⪡ Infinity
@@ -45,7 +51,7 @@ echo "1/0" | npm start
 ### Using Functions
 
 ```sh
-echo "function id(a) { return a; }; id(1)" | npm start
+echo "function id(a) { return a; }; id(1)" | duke
 ```
 ```
 ⪡ 1
@@ -54,7 +60,7 @@ echo "function id(a) { return a; }; id(1)" | npm start
 ### Console Logging
 
 ```sh
-echo "console.log('message')" | npm start
+echo "console.log('message')" | duke
 ```
 ```
 ⪢ message
@@ -63,7 +69,7 @@ echo "console.log('message')" | npm start
 ⪡ undefined
 ```
 ```sh
-echo "console.error('message')" | npm start
+echo "console.error('message')" | duke
 ```
 ```
 ⫸ Error: message
@@ -75,7 +81,7 @@ echo "console.error('message')" | npm start
 ### Throwing Errors
 
 ```sh
-echo "throw new Error('message')" | npm start
+echo "throw new Error('message')" | duke
 ```
 ```
 ⫷ Error: message
@@ -84,14 +90,10 @@ echo "throw new Error('message')" | npm start
 ### Running Scripts
 
 ```sh
-cat ./tst/dracula.js | npm start ## or:
+cat ./tst/dracula.js | duke ## or:
 ```
 ```sh
-npm start < ./tst/dracula.js
-```
-```
-> duke@x.y.z start ~
-> build/duke
+duke < ./tst/dracula.js
 ```
 ```
 ⪢ Duke: "dracula"

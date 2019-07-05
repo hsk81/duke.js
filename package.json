@@ -4,23 +4,25 @@
     "name": "Hasan Karahan",
     "url": "https://github.com/hsk81"
   },
+  "bin": {
+    "duke": "build/duke"
+  },
   "bugs": {
-    "url": "https://github.com/hsk81/duke/issues"
+    "url": "https://github.com/hsk81/duke.js/issues"
   },
   "description": "minimal JavaScript interpreter",
-  "homepage": "https://github.com/hsk81/duke#readme",
+  "homepage": "https://github.com/hsk81/duke.js#readme",
   "license": "ISC",
-  "main": "",
-  "name": "duke",
+  "name": "duke.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hsk81/duke.git"
+    "url": "git+https://github.com/hsk81/duke.js"
   },
   "scripts": {
     "build": "make -C build",
     "clean": "make -C build clean",
-    "postinstall": "cmake -B build && echo",
-    "start": "build/duke",
+    "preinstall": "cmake -B build && echo",
+    "install": "make -C build",
     "test": "echo true | build/duke"
   },
   "version": "0.3.0"
