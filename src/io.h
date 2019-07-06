@@ -23,8 +23,11 @@ void io_put(
 
 const struct IO {
     std::istream &istream = std::cin;
+    std::string iname = "";
     std::ostream &ostream = std::cout;
+    std::string oname = "";
     std::ostream &estream = std::cerr;
+    std::string ename = "";
 } standard_io;
 
 #endif /* IO_H */

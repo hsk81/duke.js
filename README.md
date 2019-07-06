@@ -55,17 +55,12 @@ $ echo "console.log('message')" | duke
 ```
 ⪢ message
 ```
-```
-⪡ undefined
-```
+
 ```sh
 $ echo "console.error('message')" | duke
 ```
 ```
 ⫸ Error: message
-```
-```
-⪡ undefined
 ```
 
 ### Throwing Errors
