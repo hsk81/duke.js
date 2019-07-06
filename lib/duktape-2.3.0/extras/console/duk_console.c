@@ -52,9 +52,9 @@ static duk_ret_t duk__console_log_helper(duk_context *ctx, const char *error_nam
 		// duk_def_prop(ctx, -3, DUK_DEFPROP_FORCE | DUK_DEFPROP_HAVE_VALUE);  /* to get e.g. 'Trace: 1 2 3' */
 		// duk_get_prop_string(ctx, -1, "stack");
 
-		fprintf(output, " ⫸ %s\n", duk_to_string(ctx, -1));
+		fprintf(output, "%s\n", duk_to_string(ctx, -1));
 	} else {
-		fprintf(output, " ⪢ %s\n", duk_to_string(ctx, -1));
+		fprintf(output, "%s\n", duk_to_string(ctx, -1));
 	}
 
 	if (flags & DUK_CONSOLE_FLUSH) {

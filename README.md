@@ -35,7 +35,7 @@ $ cat a-script.js | duke
 $ echo "1/0" | duke
 ```
 ```
-⪡ Infinity
+Infinity
 ```
 
 ### Using Functions
@@ -44,7 +44,7 @@ $ echo "1/0" | duke
 $ echo "function id(a) { return a; }; id(1)" | duke
 ```
 ```
-⪡ 1
+1
 ```
 
 ### Console Logging
@@ -53,14 +53,14 @@ $ echo "function id(a) { return a; }; id(1)" | duke
 $ echo "console.log('message')" | duke
 ```
 ```
-⪢ message
+message
 ```
 
 ```sh
 $ echo "console.error('message')" | duke
 ```
 ```
-⫸ Error: message
+Error: message
 ```
 
 ### Throwing Errors
@@ -69,7 +69,7 @@ $ echo "console.error('message')" | duke
 $ echo "throw new Error('message')" | duke
 ```
 ```
-⫷ Error: message
+Error: message
 ```
 
 ## Development

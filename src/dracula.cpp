@@ -29,7 +29,7 @@ bool dracula_compile(
     duk_push_string(ctx, text.c_str());
 
     if (io.iname.empty()) {
-        duk_push_string(ctx, "istream");
+        duk_push_string(ctx, "stdin");
     } else {
         duk_push_string(ctx, io.iname.c_str());
     }
@@ -39,30 +39,27 @@ bool dracula_compile(
     flags |= DUK_COMPILE_SHEBANG;
 
     if (duk_pcompile(ctx, flags) != 0) {
-        io_put(io.estream, {
-            " ⫷ ", duk_safe_to_string(ctx, -1), "\n"
-        });
+        std::string result(duk_safe_to_string(ctx, -1));
+        io_put(io.estream, { result, "\n" });
         return false;
-    } else {
-        return true;
     }
+    return true;
 }
 
 bool dracula_execute(
     duk_context *ctx, const IO &io
 ) {
     if (duk_pcall(ctx, 0) != 0) {
-        std::string result(duk_safe_to_string(ctx, -1));
-        io_put(io.estream, { " ⫷ ", result, "\n" });
+        std::string error(duk_safe_to_string(ctx, -1));
+        io_put(io.estream, { error, "\n" });
         duk_pop(ctx);
         return false;
-    } else {
-        std::string result(duk_safe_to_string(ctx, -1));
-        if (!result.compare("undefined")) return true;
-        io_put(io.ostream, { " ⪡ ", result, "\n" });
-        duk_pop(ctx);
-        return true;
     }
+    std::string result(duk_safe_to_string(ctx, -1));
+    if (!result.compare("undefined")) return true;
+    io_put(io.ostream, { result, "\n" });
+    duk_pop(ctx);
+    return true;
 }
 
 bool dracula_run(
