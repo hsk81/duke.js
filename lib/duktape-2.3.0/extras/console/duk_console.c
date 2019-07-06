@@ -46,11 +46,11 @@ static duk_ret_t duk__console_log_helper(duk_context *ctx, const char *error_nam
 	duk_join(ctx, n);
 
 	if (error_name) {
-		duk_push_error_object(ctx, DUK_ERR_ERROR, "%s", duk_require_string(ctx, -1));
-		duk_push_string(ctx, "name");
-		duk_push_string(ctx, error_name);
-		duk_def_prop(ctx, -3, DUK_DEFPROP_FORCE | DUK_DEFPROP_HAVE_VALUE);  /* to get e.g. 'Trace: 1 2 3' */
-		duk_get_prop_string(ctx, -1, "stack");
+		// duk_push_error_object(ctx, DUK_ERR_ERROR, "%s", duk_require_string(ctx, -1));
+		// duk_push_string(ctx, "name");
+		// duk_push_string(ctx, error_name);
+		// duk_def_prop(ctx, -3, DUK_DEFPROP_FORCE | DUK_DEFPROP_HAVE_VALUE);  /* to get e.g. 'Trace: 1 2 3' */
+		// duk_get_prop_string(ctx, -1, "stack");
 
 		fprintf(output, " ⫸ %s\n", duk_to_string(ctx, -1));
 	} else {
