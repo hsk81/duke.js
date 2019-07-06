@@ -9,9 +9,11 @@ duk_context* dracula_ctor(
 duk_context* dracula_dtor(
     duk_context *ctx);
 
-void dracula_compile(
+bool dracula_compile(
     duk_context *ctx, const IO &io = standard_io);
-void dracula_call(
+bool dracula_execute(
+    duk_context *ctx, const IO &io = standard_io);
+bool dracula_run(
     duk_context *ctx, const IO &io = standard_io);
 
 #endif /* DRACULA_H */

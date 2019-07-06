@@ -2,8 +2,14 @@
 #define IO_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <list>
+
+std::ifstream io_ctor(
+    std::string path);
+void io_dtor(
+    std::ifstream &stream);
 
 std::string io_get(
     std::istream &stream, std::string text = "");
@@ -16,9 +22,9 @@ void io_put(
     std::ostream &stream, const std::list<std::string> &texts);
 
 const struct IO {
-    std::istream &cin = std::cin;
-    std::ostream &cout = std::cout;
-    std::ostream &cerr = std::cerr;
+    std::istream &istream = std::cin;
+    std::ostream &ostream = std::cout;
+    std::ostream &estream = std::cerr;
 } standard_io;
 
 #endif /* IO_H */

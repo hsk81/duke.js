@@ -1,6 +1,6 @@
 # Duke.js: a minimal JavaScript interpreter
 
-Duke.js is a minimal JavaScript interpreter, which has been build with [Duktape] &ndash; an embeddable and portable Javascript engine with a compact footprint. The `duke` interpreter consumes JavaScript code from the standard input and then evaluates it.
+Duke.js is a minimal JavaScript interpreter, which has been build with [Duktape] &ndash; an embeddable and portable Javascript engine with a compact footprint. The `duke` interpreter consumes JavaScript code from a file or the standard input and then evaluates it.
 
 ## Prerequisites
 
@@ -14,35 +14,25 @@ URL             : https://www.cmake.org/
 ## Installation
 
 ```sh
-npm install duke.js -g
-```
-
-## Development
-
-### Cleaning
-
-```sh
-npm run clean
-```
-
-### Building
-
-```sh
-npm run build
-```
-
-### Testing
-
-```sh
-npm run test
+$ npm install duke.js --global
 ```
 
 ## Usage
 
+### Running Scripts
+
+```sh
+$ duke a-script.js 
+```
+
+```sh
+$ cat a-script.js | duke
+```
+
 ### Doing Arithmetic
 
 ```sh
-echo "1/0" | duke
+$ echo "1/0" | duke
 ```
 ```
 ⪡ Infinity
@@ -51,7 +41,7 @@ echo "1/0" | duke
 ### Using Functions
 
 ```sh
-echo "function id(a) { return a; }; id(1)" | duke
+$ echo "function id(a) { return a; }; id(1)" | duke
 ```
 ```
 ⪡ 1
@@ -60,7 +50,7 @@ echo "function id(a) { return a; }; id(1)" | duke
 ### Console Logging
 
 ```sh
-echo "console.log('message')" | duke
+$ echo "console.log('message')" | duke
 ```
 ```
 ⪢ message
@@ -69,7 +59,7 @@ echo "console.log('message')" | duke
 ⪡ undefined
 ```
 ```sh
-echo "console.error('message')" | duke
+$ echo "console.error('message')" | duke
 ```
 ```
 ⫸ Error: message
@@ -81,25 +71,30 @@ echo "console.error('message')" | duke
 ### Throwing Errors
 
 ```sh
-echo "throw new Error('message')" | duke
+$ echo "throw new Error('message')" | duke
 ```
 ```
 ⫷ Error: message
 ```
 
-### Running Scripts
+## Development
+
+### Cleaning
 
 ```sh
-cat ./tst/dracula.js | duke ## or:
+$ npm run clean
 ```
+
+### Building
+
 ```sh
-duke < ./tst/dracula.js
+$ npm run build
 ```
-```
-⪢ Duke: "dracula"
-```
-```
-⪡ undefined
+
+### Testing
+
+```sh
+$ npm run test
 ```
 
 ## Copyright

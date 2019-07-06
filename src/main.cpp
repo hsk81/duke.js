@@ -1,5 +1,6 @@
 #include "main.h"
 #include "dracula.h"
+#include "io.h"
 
 #include <assert.h>
 
@@ -9,11 +10,26 @@ int main(
     duk_context *ctx = dracula_ctor();
     assert(ctx);
 
-    dracula_compile(ctx);
-    dracula_call(ctx);
+    if (argc > 1) {
+        auto file = io_ctor(argv[1]);
+        if (!file) {
+            goto failure;
+        }
+        if (!dracula_run(ctx, { istream: file })) {
+            io_dtor(file);
+            goto failure;
+        }
+        io_dtor(file);
+        goto success;
+    }
+    if (!dracula_run(ctx)) {
+        goto failure;
+    }
 
-    ctx = dracula_dtor(ctx);
-    assert(!ctx);
-
+success:
+    dracula_dtor(ctx);
     return EXIT_SUCCESS;
+failure:
+    dracula_dtor(ctx);
+    return EXIT_FAILURE;
 }

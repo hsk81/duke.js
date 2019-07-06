@@ -1,7 +1,4 @@
 #include "dracula.h"
-#include "io.h"
-
-#include "../lib/duktape-2.3.0/src/duktape.h"
 #include "../lib/duktape-2.3.0/extras/console/duk_console.h"
 
 duk_context* dracula_ctor(
@@ -25,10 +22,10 @@ duk_context* dracula_dtor(
     return nullptr;
 }
 
-void dracula_compile(
+bool dracula_compile(
     duk_context *ctx, const IO &io
 ) {
-    std::string text = io_get(io.cin);
+    std::string text = io_get(io.istream);
 
     duk_uint_t flags = 0;
     flags |= DUK_COMPILE_EVAL;
@@ -38,23 +35,41 @@ void dracula_compile(
     duk_push_string(ctx, "eval");
 
     if (duk_pcompile(ctx, flags) != 0) {
-        io_put(io.cerr, {
+        io_put(io.estream, {
             " ⫷ ", duk_safe_to_string(ctx, -1), "\n"
         });
+        return false;
+    } else {
+        return true;
     }
 }
 
-void dracula_call(
+bool dracula_execute(
     duk_context *ctx, const IO &io
 ) {
     if (duk_pcall(ctx, 0) != 0) {
-        io_put(io.cerr, {
+        io_put(io.estream, {
             " ⫷ ", duk_safe_to_string(ctx, -1), "\n"
         });
+        duk_pop(ctx);
+        return false;
     } else {
-        io_put(io.cout, {
+        io_put(io.ostream, {
             " ⪡ ", duk_safe_to_string(ctx, -1), "\n"
         });
+        duk_pop(ctx);
+        return true;
     }
-    duk_pop(ctx);
+}
+
+bool dracula_run(
+    duk_context *ctx, const IO &io
+) {
+    if (!dracula_compile(ctx, io)) {
+        return false;
+    }
+    if (!dracula_execute(ctx, io)) {
+        return false;
+    }
+    return true;
 }

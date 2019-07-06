@@ -1,8 +1,22 @@
 #include "io.h"
 
-#include <iostream>
-#include <string>
-#include <list>
+std::ifstream io_ctor(
+    const std::string path
+) {
+    auto stream = std::ifstream(path);
+    if (!stream) {
+        io_put(std::cerr, {
+            "duke: ", path, ": No such file or directory", "\n"
+        });
+    }
+    return stream;
+}
+
+void io_dtor(
+    std::ifstream &stream
+) {
+    stream.close();
+}
 
 std::string io_get(
     std::istream &stream, std::string text
