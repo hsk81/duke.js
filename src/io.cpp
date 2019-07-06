@@ -22,7 +22,7 @@ std::string io_get(
     std::istream &stream, std::string text
 ) {
     for (std::string line; std::getline(stream, line);) {
-        text.append(line);
+        text.append(line).append("\n");
     }
     return text;
 }
