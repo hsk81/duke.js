@@ -24,11 +24,10 @@
     "url": "git+https://github.com/hsk81/duke.js"
   },
   "scripts": {
+    "preinstall": "cmake -B build && make -C build",
     "build": "make -C build",
     "clean": "make -C build clean",
-    "preinstall": "cmake -B build && echo",
-    "install": "make -C build",
     "test": "echo true | build/duke"
   },
-  "version": "0.4.5"
+  "version": "0.4.6"
 }
