@@ -12,6 +12,11 @@
   },
   "description": "minimal JavaScript interpreter",
   "homepage": "https://github.com/hsk81/duke.js#readme",
+  "keywords": [
+    "duke",
+    "javascript",
+    "interpreter"
+  ],
   "license": "ISC",
   "name": "duke.js",
   "repository": {
@@ -25,5 +30,5 @@
     "install": "make -C build",
     "test": "echo true | build/duke"
   },
-  "version": "0.4.4"
+  "version": "0.4.5"
 }
