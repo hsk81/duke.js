@@ -1,5 +1,5 @@
 #include "dracula.h"
-#include "../lib/duktape-2.3.0/extras/console/duk_console.h"
+#include "../library/duktape-2.3.0/extras/console/duk_console.h"
 
 duk_context* dracula_ctor(
     duk_context *ctx

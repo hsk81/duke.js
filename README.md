@@ -29,6 +29,10 @@ $ duke a-script.js
 ```
 
 ```sh
+$ duke < a-script.js
+```
+
+```sh
 $ cat a-script.js | duke
 ```
 
@@ -89,15 +93,24 @@ $ npm run clean
 $ npm run build
 ```
 
+### Running
+
+```sh
+$ npm start < test/true.js
+```
+
+```sh
+$ cat test/true.js | npm start 
+```
+
 ### Testing
 
 ```sh
-$ npm run test
+$ npm test
 ```
 
 ## Copyright
 
  © 2019 [Hasan Karahan](https://github.com/hsk81)
 
----
 [Duktape]: https://duktape.org/
