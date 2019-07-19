@@ -29,5 +29,5 @@
     "clean": "make -C build clean",
     "test": "echo true | build/duke"
   },
-  "version": "0.4.7"
+  "version": "0.5.0"
 }
