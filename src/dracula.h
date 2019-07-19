@@ -5,7 +5,7 @@
 #include "../lib/duktape-2.3.0/src/duktape.h"
 
 duk_context* dracula_ctor(
-    duk_context *ctx = nullptr) ;
+    duk_context *ctx = 0) ;
 duk_context* dracula_dtor(
     duk_context *ctx);
 

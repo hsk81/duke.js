@@ -10,7 +10,7 @@ duk_context* dracula_ctor(
     if (ctx) {
         duk_console_init(ctx, DUK_CONSOLE_PROXY_WRAPPER /*flags*/);
     }
-    return ctx ? ctx : nullptr;
+    return ctx ? ctx : 0;
 }
 
 duk_context* dracula_dtor(
@@ -19,7 +19,7 @@ duk_context* dracula_dtor(
     if (ctx) {
         duk_destroy_heap(ctx);
     }
-    return nullptr;
+    return 0;
 }
 
 bool dracula_compile(
@@ -40,7 +40,9 @@ bool dracula_compile(
 
     if (duk_pcompile(ctx, flags) != 0) {
         const std::string result(duk_safe_to_string(ctx, -1));
-        io_put(io.estream, { result, "\n" });
+        io_put(io.estream, std::list<std::string>{
+            result, std::string("\n")
+        });
         return false;
     }
     return true;
@@ -53,14 +55,18 @@ bool dracula_execute(
         const bool has_stack = duk_is_error(ctx, -1);
         if (has_stack) duk_get_prop_string(ctx, -1, "stack");
         const std::string error(duk_safe_to_string(ctx, -1));
-        io_put(io.estream, { error, "\n" });
+        io_put(io.estream, std::list<std::string>{
+            error, std::string("\n")
+        });
         if (has_stack) duk_pop(ctx);
         duk_pop(ctx);
         return false;
     }
     const std::string result(duk_safe_to_string(ctx, -1));
     if (!result.compare("undefined")) return true;
-    io_put(io.ostream, { result, "\n" });
+    io_put(io.ostream, std::list<std::string>{
+        result, std::string("\n")
+    });
     duk_pop(ctx);
     return true;
 }

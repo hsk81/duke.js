@@ -15,7 +15,9 @@ int main(
         if (!file) {
             goto failure;
         }
-        if (!dracula_run(ctx, { istream: file, iname: argv[1] })) {
+        if (!dracula_run(ctx, {
+            *file, std::string(argv[1])
+        })) {
             io_dtor(file);
             goto failure;
         }
