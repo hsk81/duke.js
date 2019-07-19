@@ -1,3 +1,6 @@
+[![NPM version](https://badge.fury.io/js/duke.js.svg)](https://npmjs.org/package/duke.js)
+[![Build Status](https://travis-ci.org/hsk81/duke.js.svg?branch=master)](https://travis-ci.org/hsk81/duke.js)
+
 # Duke.js: a minimal JavaScript interpreter
 
 Duke.js is a minimal JavaScript interpreter, which has been build with [Duktape] &ndash; an embeddable and portable Javascript engine with a compact footprint. The `duke` interpreter consumes JavaScript code from a file or the standard input and then evaluates it.
