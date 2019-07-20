@@ -30,5 +30,5 @@
     "start": "cmake --build build --config release --target run",
     "test": "cmake --build build --config release --target run < test/true.js"
   },
-  "version": "0.6.0"
+  "version": "0.6.1"
 }
