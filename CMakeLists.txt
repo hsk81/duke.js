@@ -9,13 +9,17 @@ endif (UNIX)
 add_custom_target(
     run COMMAND $<TARGET_FILE:duke>)
 add_executable(
-    duke source/dracula.cpp source/io.cpp source/main.cpp)
+    duke source/module.cpp source/dracula.cpp source/io.cpp source/main.cpp)
 target_compile_options(
     duke PRIVATE -Os)
 target_include_directories(
     duke PRIVATE library/duktape-2.4.0/extras/console)
 target_sources(
     duke PRIVATE library/duktape-2.4.0/extras/console/duk_console.c)
+target_include_directories(
+    duke PRIVATE library/duktape-2.4.0/extras/module-node)
+target_sources(
+    duke PRIVATE library/duktape-2.4.0/extras/module-node/duk_module_node.c)
 target_include_directories(
     duke PRIVATE library/duktape-2.4.0/source)
 target_sources(

@@ -1,5 +1,8 @@
 #include "dracula.h"
+#include "module.h"
+
 #include "../library/duktape-2.4.0/extras/console/duk_console.h"
+#include "../library/duktape-2.4.0/extras/module-node/duk_module_node.h"
 
 duk_context* dracula_ctor(
     duk_context *ctx
@@ -9,6 +12,14 @@ duk_context* dracula_ctor(
     }
     if (ctx) {
         duk_console_init(ctx, DUK_CONSOLE_PROXY_WRAPPER /*flags*/);
+    }
+    if (ctx) {
+        duk_push_object(ctx);
+        duk_push_c_function(ctx, module_resolve, DUK_VARARGS);
+        duk_put_prop_string(ctx, -2, "resolve");
+        duk_push_c_function(ctx, module_load, DUK_VARARGS);
+        duk_put_prop_string(ctx, -2, "load");
+        duk_module_node_init(ctx);
     }
     return ctx ? ctx : 0;
 }

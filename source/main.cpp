@@ -12,7 +12,7 @@ int main(
 
     if (argc > 1) {
         auto file = io_ctor(argv[1]);
-        if (!file) {
+        if (!file->good()) {
             goto failure;
         }
         if (!dracula_run(ctx, {
