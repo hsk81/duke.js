@@ -2,7 +2,7 @@
 #define DRACULA_H
 
 #include "io.h"
-#include "../library/duktape-2.3.0/source/duktape.h"
+#include "../library/duktape-2.4.0/source/duktape.h"
 
 duk_context* dracula_ctor(
     duk_context *ctx = 0) ;
