@@ -3,8 +3,8 @@
 std::ifstream* io_ctor(
     const std::string path
 ) {
-    auto stream = new std::ifstream(path);
-    if (!stream) {
+    std::ifstream *stream = new std::ifstream(path);
+    if (!stream->good()) {
         io_put(std::cerr, std::list<std::string>{
             "duke: ", path, ": No such file or directory", "\n"
         });
@@ -45,5 +45,5 @@ void io_put(
 void io_put(
     std::ostream &stream, const std::list<std::string> &texts
 ) {
-    for (auto text : texts) stream << text;
+    for (const std::string text : texts) stream << text;
 }

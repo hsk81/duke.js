@@ -36,7 +36,7 @@ duk_context* dracula_dtor(
 bool dracula_compile(
     duk_context *ctx, const IO &io
 ) {
-    const std::string text = io_get(io.istream);
+    const std::string text(io_get(io.istream));
     duk_push_string(ctx, text.c_str());
 
     if (io.iname.empty()) {
@@ -63,7 +63,7 @@ bool dracula_execute(
     duk_context *ctx, const IO &io
 ) {
     if (duk_pcall(ctx, 0) != 0) {
-        const bool has_stack = duk_is_error(ctx, -1);
+        const bool has_stack(duk_is_error(ctx, -1));
         if (has_stack) duk_get_prop_string(ctx, -1, "stack");
         const std::string error(duk_safe_to_string(ctx, -1));
         io_put(io.estream, std::list<std::string>{

@@ -7,9 +7,11 @@
 #include <list>
 
 std::ifstream* io_ctor(
-    std::string path);
+    std::string path
+);
 void io_dtor(
-    std::ifstream *stream);
+    std::ifstream *stream
+);
 
 std::string io_get(
     std::istream &stream, std::string text = "");
