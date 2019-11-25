@@ -1,29 +1,32 @@
-os:
-  - linux
-  - osx
-  - windows
-language:
-  - cpp
-compiler:
-  - clang
-  - gcc
+language: cpp
+matrix:
+  include:
+    - os: linux
+      env: MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+      addons: { apt: { packages: ["g++-9"], sources: ["ubuntu-toolchain-r-test"] } }
+    - os: osx
+      osx_image: xcode11.2
+      env: MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+    - os: windows
+      env: MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+install:
+  - eval "${MATRIX_EVAL}"
 before_script:
   - cd build
 script:
-  - cmake --version
   - cmake -S ..
   - cmake --build . --config release
   - echo true | cmake --build . --target run
 after_success:
-  - if [ $TRAVIS_COMPILER = gcc ] && [ $TRAVIS_OS_NAME = linux ]; then
+  - if [ $TRAVIS_COMPILER = g++ ] && [ $TRAVIS_OS_NAME = linux ]; then
       cmake -E rename duke duke-linux-x64 ; chmod +x duke-linux-x64 ;
       cmake -E md5sum duke-linux-x64 > duke-linux-x64.md5 ;
     fi
-  - if [ $TRAVIS_COMPILER = gcc ] && [ $TRAVIS_OS_NAME = osx ]; then
+  - if [ $TRAVIS_COMPILER = g++ ] && [ $TRAVIS_OS_NAME = osx ]; then
       cmake -E rename duke duke-macos-x64 ; chmod +x duke-macos-x64 ;
       cmake -E md5sum duke-macos-x64 > duke-macos-x64.md5 ;
     fi
-  - if [ $TRAVIS_COMPILER = gcc ] && [ $TRAVIS_OS_NAME = windows ]; then
+  - if [ $TRAVIS_COMPILER = g++ ] && [ $TRAVIS_OS_NAME = windows ]; then
       cmake -E rename Release/duke.exe duke-winnt-x64.exe ;
       cmake -E md5sum duke-winnt-x64.exe > duke-winnt-x64.exe.md5 ;
     fi
