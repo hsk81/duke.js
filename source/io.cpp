@@ -16,6 +16,7 @@ void io_dtor(
     std::ifstream *stream
 ) {
     stream->close();
+    delete stream;
 }
 
 std::string io_get(
