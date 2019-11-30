@@ -2,19 +2,27 @@
 #include "io.h"
 
 #include <filesystem>
+#include <regex>
+
 namespace fs = std::filesystem;
 
 duk_ret_t module_resolve(
     duk_context *ctx
 ) {
-    const std::string module_id(duk_get_string(ctx, 0));
-    const std::string parent_id(duk_get_string(ctx, 1));
-    const std::string directory(
-        parent_id.empty() ? std::string(".") : parent_id + "/.."
-    );
-    duk_push_sprintf(ctx, "%s",
-        fs::weakly_canonical(directory + "/" + module_id).c_str()
-    );
+    std::string module(duk_get_string(ctx, 0));
+    if (!std::regex_search(module, std::regex("\\.js$"))) {
+        module.append(".js");
+    };
+    std::string parent(duk_get_string(ctx, 1));
+    if (parent.empty()) {
+        parent.append(".");
+    } else {
+        parent.append("/..");
+    }
+    const std::string path(fs::weakly_canonical(
+        parent + "/" + module
+    ));
+    duk_push_sprintf(ctx, "%s", path.c_str());
     return 1; /*nrets*/
 }
 
@@ -22,11 +30,11 @@ duk_ret_t module_load(
     duk_context *ctx
 ) {
     duk_get_prop_string(ctx, 2, "filename");
-    const std::string full_path(duk_require_string(ctx, -1));
-    std::ifstream *file(io_ctor(full_path));
+    const std::string path(duk_require_string(ctx, -1));
+    std::ifstream *file(io_ctor(path));
     if (!file->good()) {
-        const std::string module_id(duk_get_string(ctx, 0));
-        duk_type_error(ctx, "Cannot find module '%s'", module_id.c_str());
+        const std::string module(duk_get_string(ctx, 0));
+        duk_type_error(ctx, "Cannot find module '%s'", module.c_str());
         io_dtor(file);
         return 0; /*nrets*/
     } else {

@@ -1,1 +1,1 @@
-JSON.stringify(require('./module-a.js'), null, 2);
+JSON.stringify(require('./module-a'), null, 2);
