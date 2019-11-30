@@ -31,7 +31,7 @@ duk_ret_t module_load(
 ) {
     duk_get_prop_string(ctx, 2, "filename");
     const std::string path(duk_require_string(ctx, -1));
-    std::ifstream *file(io_ctor(path));
+    std::ifstream *file(io_ctor(path, (std::ifstream*)nullptr));
     if (!file->good()) {
         const std::string module(duk_get_string(ctx, 0));
         duk_type_error(ctx, "Cannot find module '%s'", module.c_str());

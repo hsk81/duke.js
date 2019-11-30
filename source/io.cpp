@@ -1,9 +1,11 @@
 #include "io.h"
 
 std::ifstream* io_ctor(
-    const std::string path
+    const std::string path, std::ifstream *stream
 ) {
-    std::ifstream *stream = new std::ifstream(path);
+    if (stream == nullptr) {
+        stream = new std::ifstream(path);
+    }
     if (!stream->good()) {
         io_put(std::cerr, std::list<std::string>{
             "duke: ", path, ": No such file or directory", "\n"
@@ -35,6 +37,27 @@ std::list<std::string> io_get(
         texts.push_back(line);
     }
     return texts;
+}
+
+std::ofstream* io_ctor(
+    const std::string path, std::ofstream *stream
+) {
+    if (stream == nullptr) {
+        stream = new std::ofstream(path);
+    }
+    if (!stream->good()) {
+        io_put(std::cerr, std::list<std::string>{
+            "duke: ", path, ": No such file or directory", "\n"
+        });
+    }
+    return stream;
+}
+
+void io_dtor(
+    std::ofstream *stream
+) {
+    stream->close();
+    delete stream;
 }
 
 void io_put(

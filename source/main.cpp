@@ -3,8 +3,6 @@
 #include "io.h"
 
 #include <assert.h>
-#include <filesystem>
-namespace fs = std::filesystem;
 
 int main(
     int argc, char *argv[]
@@ -13,14 +11,11 @@ int main(
     assert(ctx);
     if (argc > 1) {
         const std::string path(argv[1]);
-        std::ifstream *file(io_ctor(path));
+        std::ifstream *file(io_ctor(path, (std::ifstream*)nullptr));
         if (!file->good()) {
             io_dtor(file);
             goto failure;
         }
-        fs::current_path(
-            fs::weakly_canonical(path + "/..")
-        );
         if (!dracula_run(ctx, { *file, path })) {
             io_dtor(file);
             goto failure;

@@ -33,15 +33,27 @@ duk_context* dracula_dtor(
     return 0;
 }
 
+/**
+ * @todo: b64-encode, instead of as-file!
+ */
+std::string as_file(
+    std::istream &stream, std::string path
+) {
+    std::ofstream *file = io_ctor(path, (std::ofstream*)nullptr);
+    io_put(*file, io_get(stream));
+    io_dtor(file);
+    return path;
+}
+
 bool dracula_compile(
     duk_context *ctx, const IO &io
 ) {
-    const std::string text(io_get(io.istream));
-    duk_push_string(ctx, text.c_str());
-
     if (io.iname.empty()) {
+        const std::string path(as_file(io.istream, ".stdin.js"));
+        duk_push_sprintf(ctx, "var _ = require('%s')", path.c_str());
         duk_push_string(ctx, "stdin");
     } else {
+        duk_push_sprintf(ctx, "var _ = require('%s')", io.iname.c_str());
         duk_push_string(ctx, io.iname.c_str());
     }
 
