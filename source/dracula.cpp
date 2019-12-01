@@ -1,4 +1,5 @@
 #include "dracula.h"
+#include "base64.h"
 #include "module.h"
 
 #include "../library/duktape-2.4.0/extras/console/duk_console.h"
@@ -33,27 +34,17 @@ duk_context* dracula_dtor(
     return 0;
 }
 
-/**
- * @todo: b64-encode, instead of as-file!
- */
-std::string as_file(
-    std::istream &stream, std::string path
-) {
-    std::ofstream *file = io_ctor(path, (std::ofstream*)nullptr);
-    io_put(*file, io_get(stream));
-    io_dtor(file);
-    return path;
-}
-
 bool dracula_compile(
     duk_context *ctx, const IO &io
 ) {
     if (io.iname.empty()) {
-        const std::string path(as_file(io.istream, ".stdin.js"));
-        duk_push_sprintf(ctx, "var _ = require('%s')", path.c_str());
+        const std::string data(b64_get(io.istream));
+        duk_push_sprintf(ctx,
+            "var _ = require('data:text/plain;base64,%s')", data.c_str());
         duk_push_string(ctx, "stdin");
     } else {
-        duk_push_sprintf(ctx, "var _ = require('%s')", io.iname.c_str());
+        duk_push_sprintf(ctx,
+            "var _ = require('%s')", io.iname.c_str());
         duk_push_string(ctx, io.iname.c_str());
     }
 
@@ -76,7 +67,7 @@ bool dracula_execute(
 ) {
     if (duk_pcall(ctx, 0) != 0) {
         const bool has_stack(duk_is_error(ctx, -1));
-        if (has_stack) duk_get_prop_string(ctx, -1, "stack");
+        if (has_stack) { duk_get_prop_string(ctx, -1, "stack"); }
         const std::string error(duk_safe_to_string(ctx, -1));
         io_put(io.estream, std::list<std::string>{
             error, std::string("\n")
@@ -86,7 +77,7 @@ bool dracula_execute(
         return false;
     }
     const std::string result(duk_safe_to_string(ctx, -1));
-    if (!result.compare("undefined")) return true;
+    if (!result.compare("undefined")) { return true; }
     io_put(io.ostream, std::list<std::string>{
         result, std::string("\n")
     });
