@@ -15,14 +15,15 @@ duk_ret_t module_resolve(
     };
     std::string parent(duk_get_string(ctx, 1));
     if (parent.empty()) {
-        parent.append(".");
+        if (!fs::path(module).is_absolute()) {
+            parent.append("./");
+        }
     } else {
-        parent.append("/..");
+        parent.append("/../");
     }
-    const std::string path(fs::weakly_canonical(
-        parent + "/" + module
-    ));
-    duk_push_sprintf(ctx, "%s", path.c_str());
+    duk_push_sprintf(ctx, "%s",
+        fs::weakly_canonical(parent + module).c_str()
+    );
     return 1; /*nrets*/
 }
 
