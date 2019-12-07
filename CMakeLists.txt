@@ -9,7 +9,7 @@ endif (UNIX)
 add_custom_target(
     run COMMAND $<TARGET_FILE:duke>)
 add_executable(
-    duke source/base64.cpp source/module.cpp source/dracula.cpp source/io.cpp source/main.cpp)
+    duke source/module.cpp source/dracula.cpp source/io.cpp source/main.cpp)
 target_compile_options(
     duke PRIVATE -Os)
 target_include_directories(

@@ -1,5 +1,4 @@
 #include "dracula.h"
-#include "base64.h"
 #include "module.h"
 
 #include "../library/duktape-2.4.0/extras/console/duk_console.h"
@@ -38,9 +37,8 @@ bool dracula_compile(
     duk_context *ctx, const IO &io
 ) {
     if (io.iname.empty()) {
-        const std::string data(b64_get(io.istream));
-        duk_push_sprintf(ctx,
-            "var _ = require('data:text/plain;base64,%s')", data.c_str());
+        duk_push_string(ctx,
+            "var _ = require('/dev/stdin')");
         duk_push_string(ctx, "stdin");
     } else {
         duk_push_sprintf(ctx,
