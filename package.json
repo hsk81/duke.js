@@ -11,6 +11,10 @@
     "url": "https://github.com/hsk81/duke.js/issues"
   },
   "description": "minimal JavaScript interpreter",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "yargs": "^15.0.2"
+  },
   "homepage": "https://github.com/hsk81/duke.js#readme",
   "keywords": [
     "duke",
@@ -28,7 +32,8 @@
     "build": "cmake --build build --config release",
     "clean": "cmake --build build --config release --target clean",
     "start": "cmake --build build --config release --target run",
-    "test": "cmake --build build --config release --target run < test/true.js"
+    "pretest": "cmake -B build && cmake --build build --config release",
+    "test": "jest"
   },
   "version": "0.6.2"
 }

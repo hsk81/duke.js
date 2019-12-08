@@ -1023,8 +1023,22 @@ const array = [
   "0.8023",
   "0.0795",
   "0.3362"
-]
+];
 
-console.log("floats:", array);
 const sorted = quicksort(array);
-console.log("sorted:", sorted);
+for (var i=0; i<sorted.length-1; i++) {
+    if (sorted[i] > sorted[i+1]) {
+        throw new Error('sorted[{0}] > sorted[{1}]'
+            .replace('{0}', sorted.length)
+            .replace('{1}', array.length));
+    }
+}
+/**
+ * @todo: fix sorted.length !== array.length+1!
+ *                                           ^
+ */
+if (sorted.length !== array.length+1) {
+    throw new Error('|sorted:{0}| !== |array:{1}|'
+        .replace('{0}', sorted.length)
+        .replace('{1}', array.length));
+}

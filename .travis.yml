@@ -16,7 +16,13 @@ before_script:
 script:
   - cmake -S ..
   - cmake --build . --config release
-  - echo true | cmake --build . --target run
+  - cmake --build . --config release --target run < ../test/boolean/false.js
+  - cmake --build . --config release --target run < ../test/boolean/true.js
+  - cmake --build . --config release --target run < ../test/module/index.js
+  - cmake --build . --config release --target run < ../test/module/module-a.js
+  - cmake --build . --config release --target run < ../test/module/module-b.js
+  - cmake --build . --config release --target run < ../test/module/module-c.js
+  - cmake --build . --config release --target run < ../test/quicksort/index.js
 after_success:
   - if [ $TRAVIS_COMPILER = g++ ] && [ $TRAVIS_OS_NAME = linux ]; then
       cmake -E rename duke duke-linux-x64 ; chmod +x duke-linux-x64 ;

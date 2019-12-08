@@ -3,6 +3,3 @@ module.exports = {
         require('./module-a')
     ]
 };
-console.log(JSON.stringify(
-    module.exports, null, 2
-));
