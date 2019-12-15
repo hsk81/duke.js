@@ -25,7 +25,7 @@ $ npm install duke.js --global
 ### Running Scripts
 
 ```sh
-$ duke a-script.js 
+$ duke a-script.js
 ```
 
 ```sh
@@ -96,11 +96,11 @@ $ npm run build
 ### Running
 
 ```sh
-$ npm start < test/true.js
+$ npm start < ./test/boolean/true.js
 ```
 
 ```sh
-$ cat test/true.js | npm start 
+$ cat ./test/boolean/true.js | npm start
 ```
 
 ### Testing
