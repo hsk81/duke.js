@@ -2,6 +2,7 @@
 #include "io.h"
 
 #include <filesystem>
+#include <stdio.h>
 #include <regex>
 
 namespace fs = std::filesystem;
@@ -27,11 +28,14 @@ duk_ret_t module_resolve(
         if (!fs::path(module).is_absolute()) {
             parent.append("./");
         }
+    } else if (parent == dev_stdin) {
+        parent.clear();
     } else {
         parent.append("/../");
     }
-    duk_push_sprintf(
-        ctx, "%s", fs::weakly_canonical(parent + module).c_str());
+    std::string path(
+        fs::weakly_canonical(parent + module).string());
+    duk_push_string(ctx, path.c_str());
     return 1; /*nrets*/
 }
 
