@@ -6,7 +6,7 @@ const arg = (key, lhs, rhs) => (fallback, { argv } = require('yargs')) => {
 };
 const exe = (cmd, ...args) => (options={}) => new Promise(
     (resolve, reject) => spawn(cmd, args, {
-        shell: true, stdio: 'inherit', ...options
+        shell: true, ...options
     }).on('exit', code =>
         (code === 0 ? resolve : reject)(code)
     )
