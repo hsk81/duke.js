@@ -28,11 +28,16 @@
     "url": "git+https://github.com/hsk81/duke.js"
   },
   "scripts": {
-    "preinstall": "cmake -B build && cmake --build build --config release",
+    "preinstall": "cmake -B build -DCMAKE_BUILD_TYPE=Release -DRUN_ARGS=${RUN_ARGS}",
+    "install": "cmake --build build --config release",
+    "prebuild": "cmake -B build -DCMAKE_BUILD_TYPE=Release -DRUN_ARGS=${RUN_ARGS}",
     "build": "cmake --build build --config release",
     "clean": "cmake --build build --config release --target clean",
+    "prestart": "cmake -B build -DCMAKE_BUILD_TYPE=Release -DRUN_ARGS=${RUN_ARGS}",
     "start": "cmake --build build --config release --target run",
-    "pretest": "cmake -B build && cmake --build build --config release",
+    "predebug": "cmake -B build -DCMAKE_BUILD_TYPE=Debug -DRUN_ARGS=${RUN_ARGS}",
+    "debug": "cmake --build build --config debug --target run",
+    "pretest": "npm run build",
     "test": "jest"
   },
   "version": "0.6.2"

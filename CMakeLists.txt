@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 endif (UNIX)
 
 add_custom_target(
-    run COMMAND $<TARGET_FILE:duke>)
+    run COMMAND $<TARGET_FILE:duke> ${RUN_ARGS})
 add_executable(
     duke source/module.cpp source/dracula.cpp source/io.cpp source/main.cpp)
 target_compile_options(
