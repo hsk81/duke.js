@@ -16,13 +16,19 @@ before_script:
 script:
   - cmake -S ..
   - cmake --build . --config release
-  - cmake --build . --config release --target run < ../test/boolean/false.js
-  - cmake --build . --config release --target run < ../test/boolean/true.js
-  # - cmake --build . --config release --target run < ../test/module/index.js
-  # - cmake --build . --config release --target run < ../test/module/module-a.js
-  # - cmake --build . --config release --target run < ../test/module/module-b.js
-  # - cmake --build . --config release --target run < ../test/module/module-c.js
-  # - cmake --build . --config release --target run < ../test/quicksort/index.js
+  - |
+    function run () {
+      cmake -S .. -DCMAKE_BUILD_TYPE=Release -DRUN_ARGS="$PWD/$@"
+      cmake --build . --config release --target run
+    }
+  - run ../test/boolean/false.js
+  - run ../test/boolean/true.js
+  - run ../test/dracula/index.js
+  - run ../test/error/index.js
+  - run ../test/module/index.js
+  - run ../test/quicksort/index.js
+  - echo "console.log(0)" | run ../test/stdin/index.js
+  - echo "console.log(1)" | run ../test/stdin/index.js
 after_success:
   - if [ $TRAVIS_COMPILER = g++ ] && [ $TRAVIS_OS_NAME = linux ]; then
       cmake -E rename duke duke-linux-x64 ; chmod +x duke-linux-x64 ;

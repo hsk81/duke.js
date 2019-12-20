@@ -1,9 +1,9 @@
 const { run } = require('../run');
 
-test('error/index.js via file path', () => run(
+test('error/index.js via file path', async () => expect(await run(
     './build/duke', './test/error/index.js'
-).catch((code) => expect(code).toBe(1)));
+)).toBe(0));
 
-test('error/index.js via std.input', () => run(
+test('error/index.js via std.input', async () => expect(await run(
     './build/duke', '<', './test/error/index.js'
-).catch((code) => expect(code).toBe(1)));
+)).toBe(0));
