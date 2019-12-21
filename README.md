@@ -25,15 +25,11 @@ $ npm install duke.js --global
 ### Running Scripts
 
 ```sh
-$ duke a-script.js
+$ duke ./a-script.js
 ```
 
 ```sh
-$ duke < a-script.js
-```
-
-```sh
-$ cat a-script.js | duke
+$ duke < ./a-script.js
 ```
 
 ### Doing Arithmetic
@@ -79,6 +75,36 @@ $ echo "throw new Error('message')" | duke
 Error: message
 ```
 
+### Requiring Modules
+
+```sh
+$ cat ./stdout.js
+```
+```js
+module.exports = console.log
+```
+```sh
+$ echo "require('./stdout.js')('message')" | duke
+```
+```
+message
+```
+
+### Reading Input
+
+```sh
+$ cat ./stdin.js
+```
+```js
+require('/dev/stdin')
+```
+```sh
+$ echo "console.log('message')" | duke ./stdin.js
+```
+```
+message
+```
+
 ## Development
 
 ### Cleaning
@@ -96,11 +122,11 @@ $ npm run build
 ### Running
 
 ```sh
-$ npm start < ./test/boolean/true.js
+$ RUN_ARGS=$PWD/test/boolean/true.js npm start
 ```
 
 ```sh
-$ cat ./test/boolean/true.js | npm start
+$ npm start < ./test/boolean/true.js
 ```
 
 ### Testing
