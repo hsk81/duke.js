@@ -25,6 +25,8 @@ script:
   - run ../test/boolean/true.js
   - run ../test/dracula/index.js
   - run ../test/error/index.js
+  - run ../test/json/data.json
+  - run ../test/json/index.js
   - run ../test/module/index.js
   - run ../test/quicksort/index.js
   - echo "console.log(0)" | run ../test/stdin/index.js
