@@ -19,8 +19,8 @@ static const std::regex ext_js(
 duk_ret_t module_resolve(
     duk_context *ctx
 ) {
-    std::string module(fs::path(
-        duk_get_string(ctx, 0)).lexically_normal().string()
+    std::string module(
+        fs::path(duk_get_string(ctx, 0)).lexically_normal().string()
     );
     if (module == dev_stdin) {
         duk_push_string(ctx, module.c_str());
@@ -31,17 +31,23 @@ duk_ret_t module_resolve(
     ) {
         module.append(".js");
     };
-    std::string parent(fs::path(
-        duk_get_string(ctx, 1)).lexically_normal().string()
+    std::string parent(
+        fs::path(duk_get_string(ctx, 1)).lexically_normal().string()
     );
     if (parent.empty()) {
         if (!fs::path(module).is_absolute()) {
             parent.append("./");
         }
-    } else if (parent == dev_stdin) {
-        parent.clear();
     } else {
-        parent.append("/../");
+        if (parent != dev_stdin) {
+            if (!fs::path(module).is_absolute()) {
+                parent.append("/../");
+            } else {
+                parent.clear();
+            }
+        } else {
+            parent.clear();
+        }
     }
     const std::string path(
         fs::weakly_canonical(parent + module).string()
