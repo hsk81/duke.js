@@ -75,6 +75,21 @@ $ echo "throw new Error('message')" | duke
 Error: message
 ```
 
+### Requiring JSON
+
+```sh
+$ cat ./data.json
+```
+```json
+[{"0": null, "1": "1", "2": 2}]
+```
+```sh
+$ echo "console.log(require('./data.json'))" | duke
+```
+```
+[{"0":null,"1":"1","2":2}]
+```
+
 ### Requiring Modules
 
 ```sh
