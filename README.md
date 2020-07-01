@@ -35,7 +35,7 @@ $ duke < ./a-script.js
 ### Doing Arithmetic
 
 ```sh
-$ echo "1/0" | duke
+$ echo "console.log(1/0)" | duke
 ```
 ```
 Infinity
@@ -44,7 +44,7 @@ Infinity
 ### Using Functions
 
 ```sh
-$ echo "function id(a) { return a; }; id(1)" | duke
+$ echo "function id(a) { return a; }; console.log(id(1))" | duke
 ```
 ```
 1
