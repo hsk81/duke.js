@@ -69,5 +69,5 @@ void io_put(
 void io_put(
     std::ostream &stream, const std::list<std::string> &texts
 ) {
-    for (const std::string text : texts) stream << text;
+    for (const std::string &text : texts) stream << text;
 }
