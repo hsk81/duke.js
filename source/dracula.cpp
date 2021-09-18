@@ -1,8 +1,8 @@
 #include "dracula.h"
 #include "module.h"
 
-#include "../library/duktape-2.4.0/extras/console/duk_console.h"
-#include "../library/duktape-2.4.0/extras/module-node/duk_module_node.h"
+#include "../library/duktape-2.6.0/extras/console/duk_console.h"
+#include "../library/duktape-2.6.0/extras/module-node/duk_module_node.h"
 
 duk_context* dracula_ctor(
     duk_context *ctx

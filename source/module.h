@@ -1,7 +1,7 @@
 #ifndef MODULE_H
 #define MODULE_H
 
-#include "../library/duktape-2.4.0/source/duktape.h"
+#include "../library/duktape-2.6.0/source/duktape.h"
 
 duk_ret_t module_resolve(
     duk_context *ctx

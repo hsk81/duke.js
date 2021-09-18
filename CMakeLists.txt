@@ -13,14 +13,14 @@ add_executable(
 target_compile_options(
     duke PRIVATE -Os)
 target_include_directories(
-    duke PRIVATE library/duktape-2.4.0/extras/console)
+    duke PRIVATE library/duktape-2.6.0/extras/console)
 target_sources(
-    duke PRIVATE library/duktape-2.4.0/extras/console/duk_console.c)
+    duke PRIVATE library/duktape-2.6.0/extras/console/duk_console.c)
 target_include_directories(
-    duke PRIVATE library/duktape-2.4.0/extras/module-node)
+    duke PRIVATE library/duktape-2.6.0/extras/module-node)
 target_sources(
-    duke PRIVATE library/duktape-2.4.0/extras/module-node/duk_module_node.c)
+    duke PRIVATE library/duktape-2.6.0/extras/module-node/duk_module_node.c)
 target_include_directories(
-    duke PRIVATE library/duktape-2.4.0/source)
+    duke PRIVATE library/duktape-2.6.0/source)
 target_sources(
-    duke PRIVATE library/duktape-2.4.0/source/duktape.c)
+    duke PRIVATE library/duktape-2.6.0/source/duktape.c)
