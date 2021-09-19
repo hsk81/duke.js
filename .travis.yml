@@ -1,5 +1,5 @@
 language: cpp
-matrix:
+jobs:
   include:
     - os: linux
       env: MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
@@ -49,12 +49,11 @@ after_failure:
   - ls -lh
 deploy:
   provider: releases
-  api_key:
+  token:
     secure: $GITHUB_DEPLOY_TOKEN
   file_glob: true
   file:
     - "duke-*-x64*"
-  skip_cleanup: true
   draft: true
   on:
     condition: $GITHUB_DEPLOY
