@@ -1,5 +1,5 @@
 [![NPM version](https://badge.fury.io/js/duke.js.svg)](https://npmjs.org/package/duke.js)
-[![Build Status](https://travis-ci.org/hsk81/duke.js.svg?branch=master)](https://travis-ci.org/hsk81/duke.js)
+[![Build Status](https://app.travis-ci.com/hsk81/duke.js.svg?branch=master)](https://app.travis-ci.com/github/hsk81/duke.js)
 
 # Duke.js: a minimal JavaScript interpreter
 
