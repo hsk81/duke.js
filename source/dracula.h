@@ -6,7 +6,7 @@
 
 duk_context* dracula_ctor(
     duk_context *ctx = 0
-) ;
+);
 duk_context* dracula_dtor(
     duk_context *ctx
 );
